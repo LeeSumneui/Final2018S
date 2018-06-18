@@ -13,8 +13,19 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var ID: String?
+    var userName: String?
+    var userAge: Int?
+    var userGender: String?
+    var userEmail: String = "Null"
+    var userProfile: String = ""
+    
+    var status:String = "Null"
+    
+    let NtrList:[String] = ["종합비타민","비타민A","비타민B","비타민D","비타민E","비타민K","비타민C","칼슘","마그네슘","콜라겐","프로바이오틱스","오메가3","아연","코엔자임Q10","셀레늄"]
+    
+   // var myTakingList:[String] = []
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
