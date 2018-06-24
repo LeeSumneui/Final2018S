@@ -82,27 +82,31 @@ class SetElementViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBAction func funcButtom(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected;
 
-        if selectFlag == true {
-            selectedFunc.isSelected = false
+        // 상태는 중복 선택할 수 없음.
+        // 따라서 이미 상태가 선택 된 상태에서 다른 상태를 선택했을 때 이미 선택되었던 버튼은 선택 해제를 시켜줘야 한다.
+        if selectFlag == true { // 상태가 이미 선택된 상태였다면
+            selectedFunc.isSelected = false // 이미 선택되었던 status 버튼의 selected 상태를 false로 만들어줌
+            // '선택되지 않음'을 나타내는 white로 배경 변경
             selectedFunc.backgroundColor = UIColor(red:255/255, green: 255/255, blue: 255/255, alpha: 1)
-            appDelegate.status = "Null"
+            appDelegate.status = "Null" // appdelegate에 선언되어있는 status 변수를 'Null' 로 바꿔줌
         }
         
-        if sender.isSelected == true {
-            sender.layer.cornerRadius = 40
+        if sender.isSelected == true {  // 클릭한 status 버튼의 selected 상태를 true일 경우
+            // '선택됨'을 나타내는 색깔로 배경 변경
+            sender.layer.cornerRadius = 40 // 레이어를 동그랗게 바꿔줌
             sender.backgroundColor = UIColor(red: 231/255, green: 236/255, blue: 242/255, alpha: 1)
-            selectFlag = true
-            selectedFunc = sender
+            
+            selectFlag = true // flag 변수를 true 로 변경
+            selectedFunc = sender // 선택한 버튼을 selectedFunc 변수에 넣어줌
             print("selected")
+            // appdelegate에 선언되어 있는 status 변수를 상태이름으로 바꿔줌
             if let selectedStatus = sender.titleLabel?.text {
-                print(selectedStatus)
                 appDelegate.status = selectedStatus
-                print(appDelegate.status)
             }
-        } else {
+        } else {  // 직접 선택 해제를 했을 때 (sender.isSelected == false 일 경우)
             sender.backgroundColor = UIColor(red:255/255, green: 255/255, blue: 255/255, alpha: 1)
             print("diselected")
-            selectFlag = false
+            selectFlag = false // selectFlag 변수를 false 로 변경
             appDelegate.status = "Null"
             }
     }
@@ -111,14 +115,12 @@ class SetElementViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBAction func pressGo(_ sender: UIButton) {
         if appDelegate.ID == "" {
             appDelegate.userAge = age[agePicker.selectedRow(inComponent: 0)]
-            print("age:\(appDelegate.userAge)")
             if segGender.selectedSegmentIndex == 0 {
                 appDelegate.userGender = "t"
             } else {
                 appDelegate.userGender = "f"
             }
         }
-        print("age:\(appDelegate.userAge!)")
 
         if selectFlag == true {
             self.performSegue(withIdentifier: "goToRlt", sender: self)

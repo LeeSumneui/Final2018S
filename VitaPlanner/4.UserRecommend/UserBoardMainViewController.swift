@@ -41,7 +41,7 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
             if let imageData = try? Data(contentsOf: url) {
                 cell.boardImage.image = UIImage(data: imageData)
                 // 웹에서 파일 이미지를 접근함
-                print("* : \(imageData)")
+                print("이미지 로드중")
             }
         }
         return cell
@@ -51,7 +51,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidAppear(animated)
         fetchedArray = [] // 배열을 초기화하고 서버에서 자료를 다시 가져옴
         self.downloadDataFromServer()
-        print("1:\(fetchedArray.count)")
     }
 
     override func viewDidLoad() {
@@ -79,8 +78,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
     let response = response as! HTTPURLResponse
     if !(200...299 ~= response.statusCode) { print("HTTP response Error!"); return }
         do {
-            print("do!")
-            print(receivedData)
             if let jsonData = try JSONSerialization.jsonObject(with: receivedData,options:.allowFragments) as? [[String: Any]] {
                 print("json")
             for i in 0...jsonData.count-1 {
@@ -117,7 +114,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
         
         alert.addAction(UIAlertAction(title: "Delete", style: .cancel, handler: { action in
             let pressNo = sender.tag
-            print(pressNo)
             self.deleteBoardOnServer(boardNo: pressNo)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
@@ -143,7 +139,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func pressHeart(_ sender: UIButton) {
         let pressNo = String(sender.tag)
-        print(pressNo)
         let urlString: String = "http://condi.swu.ac.kr/student/W08iphone/pressHeart.php"
         guard let requestURL = URL(string: urlString) else { return }
         var request = URLRequest(url: requestURL)
@@ -154,7 +149,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
         var restString: String = "boardNo=" + pressNo
         
         request.httpBody = restString.data(using: .utf8)
-        print(restString)
 
         let session2 = URLSession.shared
         let task2 = session2.dataTask(with: request) { (responseData, response, responseError) in
@@ -174,7 +168,6 @@ class UserBoardMainViewController: UIViewController, UITableViewDelegate, UITabl
         var restString: String = "boardNo=" + String(boardNo)
         
         request.httpBody = restString.data(using: .utf8)
-        print(restString)
         
         let session2 = URLSession.shared
         let task2 = session2.dataTask(with: request) { (responseData, response, responseError) in

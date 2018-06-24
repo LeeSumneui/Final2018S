@@ -83,14 +83,18 @@ class ModifyInfoViewController: UIViewController, UINavigationControllerDelegate
         var gender = "t"
         var imageFileName: String = ""
 
-        if textName.text == "NULL" {
-            let alert = UIAlertController(title: "error", message: "\'NULL\' 아이디로 가입할 수 없습니다.", preferredStyle: .alert)
+        if textName.text == "" {
+            let alert = UIAlertController(title: "error", message: "이름을 입력하세요", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
             return
         }
         if textAge.text == "" {
             // alert
+            let alert = UIAlertController(title: "error", message: "나이를 입력하세요", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
         }
         if segGender.selectedSegmentIndex == 1 {
             gender = "f"
@@ -104,7 +108,6 @@ class ModifyInfoViewController: UIViewController, UINavigationControllerDelegate
         
         // 프로필사진 저장
         if(changeProfile == true && profileImage.image != nil) {
-            print("2")
             let myImage = profileImage.image
             let myUrl = URL(string: "http://condi.swu.ac.kr/student/favorite/upload.php");
             var request = URLRequest(url:myUrl!);
@@ -156,8 +159,7 @@ class ModifyInfoViewController: UIViewController, UINavigationControllerDelegate
         restString += "&email=" + textEmail.text!
         restString += "&profile=" + imageFileName
         request.httpBody = restString.data(using: .utf8)
-        print(restString)
-        
+
         let session2 = URLSession.shared
         let task2 = session2.dataTask(with: request) { (responseData, response, responseError) in
             guard responseError == nil else { return }

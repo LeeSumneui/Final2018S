@@ -89,16 +89,17 @@ class WriteBoardViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @IBAction func buttonSave(_ sender: UIBarButtonItem) {
-        guard let title = textTitle.text else {
-            let alert = UIAlertController(title: "error", message: "input title", preferredStyle: .alert)
+        print(textTitle!.text)
+        if textTitle.text == "" {
+            let alert = UIAlertController(title: "제목을 입력하세요", message: "input title", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             
             self.present(alert, animated: true)
             return
         }
-        guard let content = textContent.text else {
-            let alert = UIAlertController(title: "error", message: "input contents", preferredStyle: .alert)
+        if textContent.text == "" {
+            let alert = UIAlertController(title: "내용을 입력하세요", message: "input contents", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             
@@ -130,7 +131,6 @@ class WriteBoardViewController: UIViewController, UIPickerViewDelegate, UIPicker
         dataString += "Content-Type: application/octet-stream\r\n\r\n"
         if let data = dataString.data(using: .utf8) { body.append(data) }
 
-        print(dataString)
         // imageData 위 아래로 boundary 정보 추가
         body.append(imageData)
         dataString = "\r\n"
@@ -170,9 +170,9 @@ class WriteBoardViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let selectedKeyword:String = appDelegate.NtrList[pickerKeyWord.selectedRow(inComponent: 0)]
         
         var restString: String = "id=" + userID
-        restString += "&title=" + title
+        restString += "&title=" + textTitle.text!
         restString += "&keyword=" + selectedKeyword
-        restString += "&content=" + content
+        restString += "&content=" + textContent.text
         restString += "&image=" + imageFileName
         restString += "&date=" + myDate
         request.httpBody = restString.data(using: .utf8)

@@ -13,7 +13,7 @@ class TakeListViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var ListTable: UITableView!
     @IBOutlet var listTab: UITabBarItem!
     
-    var myTakingList:[String] = []
+    //var myTakingList:[String] = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,17 +28,18 @@ class TakeListViewController: UIViewController, UITableViewDataSource, UITableVi
             self.present(alert, animated: true)
             return
         }
-        myTakingList = [] // 배열을 초기화하고 서버에서 자료를 다시 가져옴
-        self.downloadDataFromServer()
+        ListTable.reloadData()
+      //  myTakingList = [] // 배열을 초기화하고 서버에서 자료를 다시 가져옴
+      //  self.downloadDataFromServer()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myTakingList.count
+        return appDelegate.MyTakingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.ListTable.dequeueReusableCell(withIdentifier: "Taking Cell", for: indexPath)
-        if let name = myTakingList[indexPath.row] as? String {
+        if let name = appDelegate.MyTakingList[indexPath.row] as? String {
             cell.textLabel?.text = name
         }
         
@@ -54,9 +55,9 @@ class TakeListViewController: UIViewController, UITableViewDataSource, UITableVi
             // 자료구조에서 삭제
             let alert=UIAlertController(title:"정말 삭제 하시겠습니까?", message: "",preferredStyle:.alert)
             alert.addAction(UIAlertAction(title: "Delete", style: .cancel, handler: { action in
-                self.deleteElement(ntrName:self.myTakingList[indexPath.row])
+                self.deleteElement(ntrName:self.appDelegate.MyTakingList[indexPath.row])
                 
-                self.myTakingList.remove(at: indexPath.row)
+                self.appDelegate.MyTakingList.remove(at: indexPath.row)
                 self.ListTable.deleteRows(at: [indexPath], with: .fade)
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
@@ -76,41 +77,38 @@ class TakeListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    func downloadDataFromServer() -> Void {
-        let urlString: String = "http://condi.swu.ac.kr/student/W08iphone/myTakingList.php"
-        
-        guard let requestURL = URL(string: urlString) else { return }
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = "POST"
-        let restString: String = "id=" + appDelegate.ID!
-        request.httpBody = restString.data(using: .utf8)
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            guard responseError == nil else { print("Error: calling POST"); return; }
-            guard let receivedData = responseData else {
-                print("Error: not receiving Data"); return; }
-            let response = response as! HTTPURLResponse
-            if !(200...299 ~= response.statusCode) { print("HTTP response Error!");
-                print("\(response.statusCode)")
-                return }
-            do {
-                print("do!")
-                if let jsonData = try JSONSerialization.jsonObject (with: receivedData,options:.allowFragments) as? [[String: Any]] {
-                    print("1")
-                    for i in 0...jsonData.count-1 {
-                        var jsonElement = jsonData[i]
-                        let newData:String = jsonElement["ntrName"] as! String
-                        
-                        self.myTakingList.append(newData)
-                        print(newData)
-                    }
-                    DispatchQueue.main.async { self.ListTable.reloadData() }
-                    print("success~!")
-                }
-            } catch { print("Error:") } }
-        task.resume()
-    }
+//    func downloadDataFromServer() -> Void {
+//        let urlString: String = "http://condi.swu.ac.kr/student/W08iphone/myTakingList.php"
+//
+//        guard let requestURL = URL(string: urlString) else { return }
+//        var request = URLRequest(url: requestURL)
+//        request.httpMethod = "POST"
+//        let restString: String = "id=" + appDelegate.ID!
+//        request.httpBody = restString.data(using: .utf8)
+//
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+//            guard responseError == nil else { print("Error: calling POST"); return; }
+//            guard let receivedData = responseData else {
+//                print("Error: not receiving Data"); return; }
+//            let response = response as! HTTPURLResponse
+//            if !(200...299 ~= response.statusCode) { print("HTTP response Error!");
+//                print("\(response.statusCode)")
+//                return }
+//            do {
+//                if let jsonData = try JSONSerialization.jsonObject (with: receivedData,options:.allowFragments) as? [[String: Any]] {
+//                    for i in 0...jsonData.count-1 {
+//                        var jsonElement = jsonData[i]
+//                        let newData:String = jsonElement["ntrName"] as! String
+//
+//                        self.myTakingList.append(newData)
+//                    }
+//                    DispatchQueue.main.async { self.ListTable.reloadData() }
+//                    print("success~!")
+//                }
+//            } catch { print("Error:") } }
+//        task.resume()
+//    }
 
     /*
     // MARK: - Navigation

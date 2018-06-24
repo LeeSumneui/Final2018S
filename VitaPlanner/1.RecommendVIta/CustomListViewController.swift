@@ -15,8 +15,11 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var barTitle: UINavigationItem!
     
     var isStatus:Bool = true
+    // server에서 받아온 데이터 저장
     var fetchedArray: [RecommendData] = Array()
+    // 나이, 성별조건에 따라 필터링 한 데이터 저장
     var finalArray: [RecommendData] = Array()
+    // 중복 검사후 필터링 한 영양소 이름 저장
     var finalNameArray:[String] = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -29,10 +32,8 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.NtrTable.dequeueReusableCell(withIdentifier: "NutrientCell", for: indexPath) as! NutrientCell
-        let item = finalNameArray[indexPath.row]
-
-        cell.name.text = item
+        let cell = self.NtrTable.dequeueReusableCell(withIdentifier: "Nutrient Cell", for: indexPath)
+        cell.textLabel?.text = finalNameArray[indexPath.row]
 
         return cell
     }
@@ -54,9 +55,7 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
                 else if selectedAge < 60 {appDelegate.status = "middle"}
                 else if selectedAge >= 60 {appDelegate.status = "old"}
             }
-            print("status : \(appDelegate.status)")
         }
-        print(appDelegate.status)
         self.downloadDataFromServer()
     }
     
@@ -85,7 +84,6 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
                 print("\(response.statusCode)")
                 return }
             do {
-                print("do!")
                 if let jsonData = try JSONSerialization.jsonObject (with: receivedData,options:.allowFragments) as? [[String: Any]] {
                     for i in 0...jsonData.count-1 {
                         let newData: RecommendData = RecommendData()
@@ -97,15 +95,10 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
                         } else if newData.genderCont == "2" {
                             newData.genderCont = "f"
                         }
-                        print("gender!! : \(newData.genderCont)")
                         newData.descript = jsonElement["description"] as! String
                         let tempStr = jsonElement["ageCont"] as! String
                         newData.ageCont = Int(tempStr)!
                         self.fetchedArray.append(newData)
-//                        print(newData.name)
-//                        print(newData.genderCont)
-//                        print(newData.descript)
-//                        print(newData.ageCont)
                     }
                     DispatchQueue.main.async {
                             self.finalResult(age:self.appDelegate.userAge!, gender:self.appDelegate.userGender!)
@@ -141,8 +134,6 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
             if fetchedArray[i].genderCont == "0" {
                 PassGender = true
             } else if fetchedArray[i].genderCont != (appDelegate.userGender!) {
-                print(appDelegate.userGender!)
-                print(fetchedArray[i].genderCont)
                 PassGender = false
                 print("성별땜에 삭제 : \(fetchedArray[i].description)")
             } else if fetchedArray[i].genderCont == (appDelegate.userGender!) {
@@ -163,8 +154,6 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
             let count2 = finalNameArray.count
             var insert = true
             for j in 0..<count2 {
-                print("finalArray \(i) : \(finalArray[i].name)")
-                print("finalNameArray \(j) : \(finalNameArray[j])")
                 if finalArray[i].name == finalNameArray[j] { insert = false; print("이름 중복 삭제"); break}
             }
             if finalArray[i].name == "" { insert = false } // 설명을 위한 데이터의 이름은 삭제

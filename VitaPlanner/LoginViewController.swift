@@ -19,13 +19,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var User: [NSManagedObject] = []
     var loginStatusStr:String?
     
+    func getContext () -> NSManagedObjectContext {
+        return appDelegate.persistentContainer.viewContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         // core data에 저장되어있는 id가 있으면(이미 로그인 되어있는 경우) 바로 main화면으로 이동
         self.loginStatus.isHidden = true
-
         let context = self.getContext()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ValidID")
     
@@ -41,13 +44,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             login(id: validId, pw: validPw, auto: true)
             }
         } catch {
-           // print("로그인 상태 아님")
+           
         }
 
-    }
-    
-    func getContext () -> NSManagedObjectContext {
-        return appDelegate.persistentContainer.viewContext
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -60,7 +59,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    @IBAction func loginPressed() { // 추가적으로 수정하게 됨
+    @IBAction func loginPressed() {
         if loginUserid.text == "" {
             // alert
             let alert = UIAlertController(title: "필수 항목 입력", message: "아이디를 입력해주세요", preferredStyle: .alert)
@@ -76,10 +75,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        // 둘 다 입력한 경우 로그인 함수 호출
         login(id:loginUserid.text!, pw:loginPassword.text!, auto: false)
         
     }
     
+    // '계정 없이 사용하기' 를 클릭한 경우
     @IBAction func noAccount(_ sender: UIButton) {
         self.appDelegate.ID = ""
         self.appDelegate.userName = ""
@@ -91,8 +92,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "toLoginSuccess", sender: self)
     }
     
-
+    // 로그인 처리를 해주는 함수
     func login(id:String, pw:String, auto:Bool) -> Void {
+        
         let urlString: String = "http://condi.swu.ac.kr/student/W08iphone/login/loginUser.php"
         guard let requestURL = URL(string: urlString)
             else {
@@ -117,37 +119,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print ("HTTP Error!")
                     return }
                 
-                guard let jsonData = try JSONSerialization.jsonObject(with: receivedData, options:.allowFragments) as? [String: Any] else {
+                guard let jsonData = try JSONSerialization.jsonObject(with: receivedData, options:.allowFragments)as? [String: Any] else {
                     print("JSON Serialization Error!")
                     return }
                 
-                guard let success = jsonData["success"] as! String! else { print("Error: PHP failure(success)")
+                guard let success = jsonData["success"] as! String? else { print("Error: PHP failure(success)")
                     return }
                 
                 
                 if success == "YES" {
                     
                 DispatchQueue.main.async {
-                    if let name = jsonData["name"] as! String! {
+                    if let name = jsonData["name"] as! String? {
                         self.appDelegate.ID = id
                         self.appDelegate.userName = name
-                        print("yes1")
                     }
-                    if let age = jsonData["age"] as! String! {
+                    if let age = jsonData["age"] as! String? {
                         self.appDelegate.userAge = Int(age)
-                        print("yes2")
                     }
-                    if let gender = jsonData["gender"] as! String! {
+                    if let gender = jsonData["gender"] as! String? {
                         self.appDelegate.userGender = gender
-                        print("yes3")
                     }
-                    if let email = jsonData["email"] as! String! {
+                    if let email = jsonData["email"] as! String? {
                         self.appDelegate.userEmail = email
-                        print("yes4")
                     }
-                    if let profile = jsonData["profileImage"] as! String! {
+                    if let profile = jsonData["profileImage"] as! String? {
                         self.appDelegate.userProfile = profile
-                        print("yes5")
                     }
                     
                     // 로그인 성공시 coreData에 userid/password 저장 (자동 로그인인 경우 안함)

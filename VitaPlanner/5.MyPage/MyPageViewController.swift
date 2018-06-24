@@ -27,6 +27,7 @@ class MyPageViewController: UIViewController {
         profile.layer.cornerRadius = 70
         profile.layer.masksToBounds = true
         
+        // 이 코드 삭제하면 1개 이상의 데이터가 저장됨
         let context = self.getContext()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ValidID")
         do {
@@ -40,13 +41,11 @@ class MyPageViewController: UIViewController {
         super.viewDidAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         var imageName = appDelegate.userProfile
-        print(appDelegate.userProfile)
 
         labelID.text = appDelegate.ID
         labelName.text = appDelegate.userName
 
         let gender = appDelegate.userGender
-        print(gender)
         if (gender == "t" || gender == "true") {
             labelGender.text = "여"
             labelGender.textColor = UIColor.red
@@ -57,12 +56,12 @@ class MyPageViewController: UIViewController {
         labelAge.text = String(appDelegate.userAge!) + " 세"
 
         if (imageName != "") {
-            print("왜안되지")
+            print("이미지 로드중")
             let urlString = "http://condi.swu.ac.kr/student/favorite/"
             imageName = urlString + imageName
             let url = URL(string: imageName)!
             if let imageData = try? Data(contentsOf: url) {
-                print("왜안되지")
+                print("이미지 로드중")
                 profile.image = UIImage(data: imageData)
                 // 웹에서 파일 이미지를 접근함
             }
@@ -97,8 +96,10 @@ class MyPageViewController: UIViewController {
                     print("Could not delete \(error), \(error.userInfo)") }
                 // 배열에서 해당 자료 삭제
                 self.User.remove(at: 0)
+                
             }
             self.appDelegate.ID = ""
+            self.appDelegate.MyTakingList = []
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginView = storyboard.instantiateViewController(withIdentifier: "LoginView")

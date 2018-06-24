@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8628BF4820C6599200B8B725 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BF4720C6599200B8B725 /* LoginViewController.swift */; };
 		8628BF4A20C6615F00B8B725 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BF4920C6615F00B8B725 /* JoinViewController.swift */; };
+		862EA5A320DE2D6D00B70480 /* sesfefwe.png in Resources */ = {isa = PBXBuildFile; fileRef = 862EA5A220DE2D6C00B70480 /* sesfefwe.png */; };
 		865007DD20BA677A0036122F /* SetElementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865007DC20BA677A0036122F /* SetElementViewController.swift */; };
 		865007DF20BA67B40036122F /* CustomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865007DE20BA67B40036122F /* CustomListViewController.swift */; };
 		865007E120BA67F10036122F /* PrescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865007E020BA67F10036122F /* PrescriptionViewController.swift */; };
@@ -20,7 +21,6 @@
 		8650080D20BAF6770036122F /* TakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650080C20BAF6770036122F /* TakeListViewController.swift */; };
 		8659759E20C5185F00ACF552 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659759D20C5185F00ACF552 /* BoardCell.swift */; };
 		8663FD3020D133CD00C819D8 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8663FD2F20D133CC00C819D8 /* button.png */; };
-		8663FD3220D1417E00C819D8 /* MyTakingListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8663FD3120D1417E00C819D8 /* MyTakingListData.swift */; };
 		8667722020D507B200D7550F /* 80-shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8667721E20D507B200D7550F /* 80-shopping-cart.png */; };
 		8667722120D507B200D7550F /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8667721F20D507B200D7550F /* 179-notepad.png */; };
 		8667722320D5167400D7550F /* if_Cancel_1063907.png in Resources */ = {isa = PBXBuildFile; fileRef = 8667722220D5167400D7550F /* if_Cancel_1063907.png */; };
@@ -32,7 +32,6 @@
 		867AA91920CE9D2B005B5D42 /* bone.png in Resources */ = {isa = PBXBuildFile; fileRef = 867AA91320CE9D2B005B5D42 /* bone.png */; };
 		867AA91A20CE9D2B005B5D42 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 867AA91420CE9D2B005B5D42 /* test.png */; };
 		867AA91C20CE9F2E005B5D42 /* brain.png in Resources */ = {isa = PBXBuildFile; fileRef = 867AA91B20CE9F2E005B5D42 /* brain.png */; };
-		867AA92020CED3ED005B5D42 /* NutrientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867AA91F20CED3ED005B5D42 /* NutrientCell.swift */; };
 		867AA92220CED41D005B5D42 /* RecommendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867AA92120CED41D005B5D42 /* RecommendData.swift */; };
 		867AA92520CEDD43005B5D42 /* VitaPlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 867AA92320CEDD43005B5D42 /* VitaPlanner.xcdatamodeld */; };
 		86D01E8E20A96E3700F4C6AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D01E8D20A96E3700F4C6AC /* AppDelegate.swift */; };
@@ -46,6 +45,7 @@
 /* Begin PBXFileReference section */
 		8628BF4720C6599200B8B725 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8628BF4920C6615F00B8B725 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		862EA5A220DE2D6C00B70480 /* sesfefwe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sesfefwe.png; sourceTree = "<group>"; };
 		865007DC20BA677A0036122F /* SetElementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetElementViewController.swift; sourceTree = "<group>"; };
 		865007DE20BA67B40036122F /* CustomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListViewController.swift; sourceTree = "<group>"; };
 		865007E020BA67F10036122F /* PrescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrescriptionViewController.swift; sourceTree = "<group>"; };
@@ -57,7 +57,6 @@
 		8650080C20BAF6770036122F /* TakeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeListViewController.swift; sourceTree = "<group>"; };
 		8659759D20C5185F00ACF552 /* BoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
 		8663FD2F20D133CC00C819D8 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		8663FD3120D1417E00C819D8 /* MyTakingListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTakingListData.swift; sourceTree = "<group>"; };
 		8667721E20D507B200D7550F /* 80-shopping-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80-shopping-cart.png"; sourceTree = "<group>"; };
 		8667721F20D507B200D7550F /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
 		8667722220D5167400D7550F /* if_Cancel_1063907.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = if_Cancel_1063907.png; sourceTree = "<group>"; };
@@ -69,7 +68,6 @@
 		867AA91320CE9D2B005B5D42 /* bone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bone.png; sourceTree = "<group>"; };
 		867AA91420CE9D2B005B5D42 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		867AA91B20CE9F2E005B5D42 /* brain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brain.png; sourceTree = "<group>"; };
-		867AA91F20CED3ED005B5D42 /* NutrientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientCell.swift; sourceTree = "<group>"; };
 		867AA92120CED41D005B5D42 /* RecommendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendData.swift; sourceTree = "<group>"; };
 		867AA92420CEDD43005B5D42 /* VitaPlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VitaPlanner.xcdatamodel; sourceTree = "<group>"; };
 		86D01E8A20A96E3700F4C6AC /* VitaPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VitaPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +94,6 @@
 		865007D720BA66A60036122F /* 1.RecommendVIta */ = {
 			isa = PBXGroup;
 			children = (
-				867AA91F20CED3ED005B5D42 /* NutrientCell.swift */,
 				865007DC20BA677A0036122F /* SetElementViewController.swift */,
 				865007DE20BA67B40036122F /* CustomListViewController.swift */,
 				865007E020BA67F10036122F /* PrescriptionViewController.swift */,
@@ -130,7 +127,6 @@
 				865007F220BA6ADC0036122F /* MyPageViewController.swift */,
 				865007F420BA6B6B0036122F /* ModifyInfoViewController.swift */,
 				8650080C20BAF6770036122F /* TakeListViewController.swift */,
-				8663FD3120D1417E00C819D8 /* MyTakingListData.swift */,
 			);
 			path = 5.MyPage;
 			sourceTree = "<group>";
@@ -138,6 +134,7 @@
 		865975A220C51A6100ACF552 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				862EA5A220DE2D6C00B70480 /* sesfefwe.png */,
 				8667722420D5313900D7550F /* if_house-home-real_estate-property-glyph_763224.png */,
 				8667722220D5167400D7550F /* if_Cancel_1063907.png */,
 				8667721E20D507B200D7550F /* 80-shopping-cart.png */,
@@ -256,6 +253,7 @@
 				8667722020D507B200D7550F /* 80-shopping-cart.png in Resources */,
 				8667722520D5313A00D7550F /* if_house-home-real_estate-property-glyph_763224.png in Resources */,
 				867AA91A20CE9D2B005B5D42 /* test.png in Resources */,
+				862EA5A320DE2D6D00B70480 /* sesfefwe.png in Resources */,
 				867AA91820CE9D2B005B5D42 /* tired.png in Resources */,
 				867AA91720CE9D2B005B5D42 /* if_relationships_101822.png in Resources */,
 				867AA91520CE9D2B005B5D42 /* drug.png in Resources */,
@@ -276,10 +274,8 @@
 			files = (
 				867AA92520CEDD43005B5D42 /* VitaPlanner.xcdatamodeld in Sources */,
 				8659759E20C5185F00ACF552 /* BoardCell.swift in Sources */,
-				867AA92020CED3ED005B5D42 /* NutrientCell.swift in Sources */,
 				865007ED20BA69650036122F /* UserBoardMainViewController.swift in Sources */,
 				86D01E9020A96E3700F4C6AC /* MainViewController.swift in Sources */,
-				8663FD3220D1417E00C819D8 /* MyTakingListData.swift in Sources */,
 				8628BF4A20C6615F00B8B725 /* JoinViewController.swift in Sources */,
 				865007F120BA6AB90036122F /* WriteBoardViewController.swift in Sources */,
 				865007DD20BA677A0036122F /* SetElementViewController.swift in Sources */,

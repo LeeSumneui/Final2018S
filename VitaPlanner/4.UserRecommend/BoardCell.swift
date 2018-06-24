@@ -9,7 +9,6 @@
 import UIKit
 
 class BoardCell: UITableViewCell, UITextViewDelegate{
-
     
    // @IBOutlet var boardElement: Element!
     @IBOutlet var title: UILabel!
